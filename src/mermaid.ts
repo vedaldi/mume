@@ -22,21 +22,26 @@ export async function mermaidToPNG(
   }
   try {
     await utility.execFile(
-      "npx",
-      [
-        "mmdc",
-        "--theme",
-        themeName,
-        "--input",
-        info.path,
-        "--output",
-        pngFilePath,
-      ],
+      "lib/mume/node_modules/.bin/mmdc",
+      ["--theme", themeName, "--input", info.path, "--output", pngFilePath],
       {
         shell: true,
         cwd: projectDirectoryPath,
       },
     );
+    const pdfFilePath = pngFilePath.slice(0, -4) + ".pdf";
+    await utility.execFile(
+      "lib/mume/node_modules/.bin/mmdc",
+      ["--theme", themeName, "--input", info.path, "--output", pdfFilePath],
+      {
+        shell: true,
+        cwd: projectDirectoryPath,
+      },
+    );
+    await utility.execFile("pdfcrop", [pdfFilePath, pdfFilePath], {
+      shell: true,
+      cwd: projectDirectoryPath,
+    });
     return pngFilePath;
   } catch (error) {
     throw new Error(

@@ -68,6 +68,12 @@ export function toSVGMarkdown(
             return reject(error.toString());
           }
 
+          items = items.filter((a) => a.match(/\_(\d+)\.svg$/));
+
+          if (items.length == 0) {
+            return resolve("");
+          }
+
           items = items.sort((a, b) => {
             const offsetA = parseInt(a.match(/\_(\d+)\.svg$/)[1], 10);
             const offsetB = parseInt(b.match(/\_(\d+)\.svg$/)[1], 10);
@@ -75,7 +81,7 @@ export function toSVGMarkdown(
           });
 
           let svgMarkdown = "";
-          const r = Math.random();
+          // const r = Math.random();
 
           items.forEach((fileName) => {
             const match = fileName.match(
@@ -112,7 +118,8 @@ export function toSVGMarkdown(
                   svgZoom ? `style="zoom:${svgZoom};"` : ""
                 }>`;
               } else {
-                svgMarkdown += `![](${svgFilePath}?${r})\n`;
+                // svgMarkdown += `![](${svgFilePath}?${r})\n`;
+                svgMarkdown += `![](${svgFilePath})\n`;
               }
             }
           });

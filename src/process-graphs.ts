@@ -162,14 +162,10 @@ export async function processGraphs(
     await svgElementToPNGFile(svg, pngFilePath, imageMagickPath);
     let displayPNGFilePath;
     if (useRelativeFilePath) {
-      displayPNGFilePath =
-        path.relative(fileDirectoryPath, pngFilePath) + "?" + Math.random();
+      displayPNGFilePath = path.relative(fileDirectoryPath, pngFilePath); // + "?" + Math.random();
     } else {
       displayPNGFilePath =
-        "/" +
-        path.relative(projectDirectoryPath, pngFilePath) +
-        "?" +
-        Math.random();
+        "/" + path.relative(projectDirectoryPath, pngFilePath); // + "?" + Math.random();
     }
     displayPNGFilePath = displayPNGFilePath.replace(/\\/g, "/"); // fix windows path error.
 
@@ -311,14 +307,10 @@ export async function processGraphs(
 
         let displayPNGFilePath;
         if (useRelativeFilePath) {
-          displayPNGFilePath =
-            path.relative(fileDirectoryPath, pngFilePath) + "?" + Math.random();
+          displayPNGFilePath = path.relative(fileDirectoryPath, pngFilePath); // + "?" + Math.random();
         } else {
           displayPNGFilePath =
-            "/" +
-            path.relative(projectDirectoryPath, pngFilePath) +
-            "?" +
-            Math.random();
+            "/" + path.relative(projectDirectoryPath, pngFilePath); // + "?" + sMath.random();
         }
         clearCodeBlock(lines, start, end);
 
