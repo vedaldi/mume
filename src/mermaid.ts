@@ -22,8 +22,18 @@ export async function mermaidToPNG(
   }
   try {
     await utility.execFile(
-      "lib/mume/node_modules/.bin/mmdc",
-      ["--theme", themeName, "--input", info.path, "--output", pngFilePath],
+      "npx",
+      [
+        "mmdc",
+        "--theme",
+        themeName,
+        "--input",
+        info.path,
+        "--output",
+        pngFilePath,
+      ],
+      // "lib/mume/node_modules/.bin/mmdc",
+      // ["--theme", themeName, "--input", info.path, "--output", pngFilePath],
       {
         shell: true,
         cwd: projectDirectoryPath,
